@@ -11,5 +11,10 @@
             "name": "Giso Stallenberg",
             "email": "giso@connectholland.nl"
         }
-    ]
+    ],
+    "autoload": {
+        "classmap": [
+            "src/Framework/"
+        ]
+    }
 }

@@ -1,0 +1,15 @@
+{
+    "name": "connectholland/windmill-test-utilities",
+    "description": "Files that support running tests for the Windmill Framework in a project",
+    "type": "library",
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Giso Stallenberg",
+            "email": "giso@connectholland.nl"
+        }
+    ]
+}

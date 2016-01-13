@@ -90,6 +90,51 @@ class AccessorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test calling a static getter method
+     *
+     * @dataProvider provideTestData
+     *
+     * @param string $property
+     * @param string $defaultValue
+     * @param string $setValue
+     * @param string $method
+     */
+    public function testStaticGetterMethod($property, $defaultValue, $setValue, $method)
+    {
+        $accessor = new Accessor(new PublicProtectedPrivateFixture());
+        $staticMethod = $method . 'Static';
+
+        $this->assertEquals($defaultValue, $accessor::$staticMethod());
+    }
+
+    /**
+     * Test calling a static setter method
+     *
+     * @dataProvider provideTestData
+     *
+     * @param string $property
+     * @param string $defaultValue
+     * @param string $setValue
+     * @param string $getter
+     * @param string $setter
+     */
+    public function testStaticSetterMethod($property, $defaultValue, $setValue, $getter, $setter)
+    {
+        $fixture = new PublicProtectedPrivateFixture();
+        $accessor = new Accessor($fixture);
+
+        $this->assertAttributeEquals($defaultValue, $property, $fixture);
+
+        $staticSetter = $setter. 'Static';
+        $accessor::$staticSetter($setValue);
+
+        $staticGetter = $getter. 'Static';
+
+        $this->assertEquals($setValue, $accessor::$staticGetter());
+    }
+
+
+    /**
      * Gets test data
      *
      * @return array

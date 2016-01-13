@@ -13,6 +13,10 @@ class PublicProtectedPrivateFixture
     protected $bar = 'bar';
     private $foo = 'foo';
 
+    public static $bazStatic = 'baz';
+    protected static $barStatic = 'bar';
+    private static $fooStatic = 'foo';
+
     public function setBaz($baz)
     {
         $this->baz = $baz;
@@ -41,6 +45,36 @@ class PublicProtectedPrivateFixture
     private function getFoo()
     {
         return $this->foo;
+    }
+
+    public static function setBazStatic($baz)
+    {
+        self::$bazStatic = $baz;
+    }
+
+    public static function getBazStatic()
+    {
+        return self::$bazStatic;
+    }
+
+    protected static function setBarStatic($bar)
+    {
+        self::$barStatic = $bar;
+    }
+
+    protected static function getBarStatic()
+    {
+        return self::$barStatic;
+    }
+
+    private static function setFooStatic($foo)
+    {
+        self::$fooStatic = $foo;
+    }
+
+    private static function getFooStatic()
+    {
+        return self::$fooStatic;
     }
 
 }

@@ -23,7 +23,7 @@ class Accessor
      *
      * @var ReflectionClass
      */
-    private $reflectionClass;
+    private static $reflectionClass;
 
     /**
      * Creates the accessor for $object
@@ -33,7 +33,7 @@ class Accessor
     public function __construct($object)
     {
         $this->object = $object;
-        $this->reflectionClass = new ReflectionClass(get_class($object));
+        self::$reflectionClass = new ReflectionClass(get_class($object));
     }
 
     /**
@@ -44,7 +44,7 @@ class Accessor
      */
     public function __get($name)
     {
-        $property = $this->reflectionClass->getProperty($name);
+        $property = self::$reflectionClass->getProperty($name);
         $property->setAccessible(true);
 
         return $property->getValue($this->object);
@@ -58,7 +58,7 @@ class Accessor
      */
     public function __set($name, $value)
     {
-        $property = $this->reflectionClass->getProperty($name);
+        $property = self::$reflectionClass->getProperty($name);
         $property->setAccessible(true);
 
         $property->setValue($this->object, $value);
@@ -73,7 +73,7 @@ class Accessor
      */
     public function __call($name, $arguments)
     {
-        $method = $this->reflectionClass->getMethod($name);
+        $method = self::$reflectionClass->getMethod($name);
         $method->setAccessible(true);
 
         return $method->invokeArgs($this->object, $arguments);
@@ -88,7 +88,7 @@ class Accessor
      */
     public static function __callStatic($name, $arguments)
     {
-        $method = $this->reflectionClass->getMethod($name);
+        $method = self::$reflectionClass->getMethod($name);
         $method->setAccessible(true);
 
         return $method->invokeArgs(null, $arguments);
